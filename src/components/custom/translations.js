@@ -1,0 +1,36 @@
+const translations = {
+  es: {
+    home: "Inicio",
+    contact: "Contacto",
+    downloadCV: "Descargar CV",
+    linkedin: "LinkedIn",
+    github: "Github",
+    changeTheme: "Cambiar Tema",
+    yearsOfWork: "Años de trabajo",
+    completedProjects: "Proyectos completados",
+    satisfiedCustomers: "Clientes satisfechos",
+    about: "Sobre mí",
+    projects: "Proyectos",
+    skills: "Habilidades",
+    contactTab: "Contacto",
+    myIntro: "Mi introducción",
+  },
+  en: {
+    home: "Home",
+    contact: "Contact",
+    downloadCV: "Download CV",
+    linkedin: "LinkedIn",
+    github: "Github",
+    changeTheme: "Change Theme",
+    yearsOfWork: "Years of work",
+    completedProjects: "Completed projects",
+    satisfiedCustomers: "Satisfied customers",
+    about: "About",
+    projects: "Projects",
+    skills: "Skills",
+    contactTab: "Contact",
+    myIntro: "My Intro",
+  },
+};
+
+export default translations;
