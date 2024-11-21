@@ -9,8 +9,11 @@ import GradientBackground from "../gradientBackground/gradientBackground";
 import Trayectory from "../trayectory/Trayectory";
 import Skills from "../skills/Skills";
 import AboutMe from "../aboutMe/AboutMe";
+import CVSantiagoHaquinLoValvo from "../../assets/CVSantiagoHaquinLoValvo.pdf";
 
 const HomePage = () => {
+  const [copied, setCopied] = useState(false);
+
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
@@ -32,6 +35,14 @@ const HomePage = () => {
 
   const handleChangeTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+
+  const handleCopyEmail = () => {
+    const email = "santihaquin321@gmail.com";
+    navigator.clipboard.writeText(email).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
   };
 
   useEffect(() => {
@@ -77,7 +88,7 @@ const HomePage = () => {
     <div>
       <GradientBackground />
       <div className="min-h-screen flex flex-col items-center">
-        <div className="flex justify-center items-center gap-5">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-5 w-full px-4 sm:px-8">
           <Navbar />
           <label className="swap mt-7 text-blue-950 dark:text-white my-4 swap-rotate">
             <input
@@ -106,59 +117,90 @@ const HomePage = () => {
           </label>
         </div>
 
-        <div className="flex flex-col text-black dark:text-white items-center justify-center mt-20 text-center w-full px-4">
-          <p className="text-3xl  font-spaceMono m-2 typewriter">
+        <div className="flex flex-col text-black dark:text-white items-center justify-center mt-20 text-center w-full px-4 sm:px-8">
+          <p className="text-2xl sm:text-3xl md:text-4xl font-spaceMono m-2 typewriter">
             ¡Hola! soy...
           </p>
-          <h1 className="text-8xl  font-ubuntu font-bold mb-4">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-ubuntu font-bold mb-4">
             Santiago Haquin
           </h1>
-          <h2 className="font-roboto  mt-4 text-3xl">
+          <h2 className="font-roboto mt-4 text-2xl sm:text-3xl lg:text-4xl">
             Desarrollador Full-Stack
           </h2>
         </div>
-        <div className="flex text-lg items-center justify-center mt-4 font-roboto text-white">
-          <button className="m-1 gap-1 p-[5px] px-[15px] rounded-md bg-blue-950 flex items-center justify-center hover:bg-opacity-70 hover:bg-blue-900 transition-all duration-200">
+
+        <div className="flex flex-wrap justify-center text-lg items-center mt-4 font-roboto text-white px-4 sm:px-8">
+          <button className="m-1 gap-1 p-2 px-4 rounded-md bg-blue-950 flex items-center justify-center hover:bg-opacity-70 hover:bg-blue-900 transition-all duration-200 text-sm sm:text-base">
             <IoDownloadOutline />
-            <a className="ml-1" target="_blank" href="">
+            <a
+              className="ml-1"
+              href={CVSantiagoHaquinLoValvo}
+              download="CV Santiago Haquin Lo Valvo.pdf"
+              target="_blank"
+            >
               CV
             </a>
           </button>
-          <button className="m-1 gap-1 p-[5px] px-[15px] rounded-md bg-blue-950 flex items-center justify-center hover:bg-opacity-70 hover:bg-blue-900 transition-all duration-200">
+
+          <button
+            className="m-1 gap-1 p-2 px-4 rounded-md bg-blue-950 flex items-center justify-center hover:bg-opacity-70 hover:bg-blue-900 transition-all duration-200 text-sm sm:text-base"
+            onClick={() =>
+              window.open(
+                "https://www.linkedin.com/in/santiago-haquin-lo-valvo-866717256/",
+                "_blank"
+              )
+            }
+          >
             <FaLinkedin />
-            <a
-              className="ml-1"
-              target="_blank"
-              href="https://www.linkedin.com/in/santiago-haquin-lo-valvo-866717256/"
-            >
-              Linkedin
-            </a>
+            <span className="ml-1">LinkedIn</span>
           </button>
-          <button className="m-1 gap-1 p-[5px] px-[15px] rounded-md bg-blue-950 flex items-center justify-center hover:bg-opacity-70 hover:bg-blue-900 transition-all duration-200">
+
+          <button
+            className="m-1 gap-1 p-2 px-4 rounded-md bg-blue-950 flex items-center justify-center hover:bg-opacity-70 hover:bg-blue-900 transition-all duration-200 text-sm sm:text-base"
+            onClick={() =>
+              window.open("https://github.com/SantiagoHaquin", "_blank")
+            }
+          >
             <FaGithub />
-            <a
-              className="ml-1"
-              target="_blank"
-              href="https://github.com/SantiagoHaquin"
-            >
-              GitHub
-            </a>
+            <span className="ml-1">GitHub</span>
           </button>
-          <button className="m-1 gap-1 p-[5px] px-[15px] rounded-md bg-blue-950 flex items-center justify-center hover:bg-opacity-70 hover:bg-blue-900 transition-all duration-200">
+
+          <button
+            className="relative m-1 gap-1 p-2 px-4 rounded-md bg-blue-950 flex items-center justify-center hover:bg-opacity-70 hover:bg-blue-900 transition-all duration-200 text-sm sm:text-base"
+            onClick={handleCopyEmail}
+          >
             <IoMdMail />
             <span className="ml-1 mr-1">santihaquin321@gmail.com</span>
             <FaCopy />
+
+            {copied && (
+              <div className="absolute top-full mt-1 p-1 px-3 rounded-md bg-blue-800 text-white text-sm">
+                ¡Copiado!
+              </div>
+            )}
           </button>
         </div>
-        <div className="absolute scroll bottom-4 flex flex-col items-center text-black text-xl dark:text-white">
-          <IoIosArrowDown className="mt-1" />
+
+        <div className="absolute bottom-4 flex flex-col items-center text-black text-xl dark:text-white">
+          <IoIosArrowDown className="mt-1 text-2xl sm:text-3xl" />
         </div>
       </div>
 
-      <Projects />
-      <Trayectory />
-      <Skills/>
-      <AboutMe/>
+      <div className="w-full">
+        <div id="proyectos">
+          <Projects />
+        </div>
+        {/* <div id="trayectoria">
+          
+          <Trayectory />
+        </div> */}
+        <div id="skills">
+          <Skills />
+        </div>
+        <div id="sobre-mi">
+          <AboutMe />
+        </div>
+      </div>
     </div>
   );
 };

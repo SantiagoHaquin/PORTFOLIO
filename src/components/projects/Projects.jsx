@@ -11,7 +11,7 @@ function Projects() {
       title: "Training Center",
       languages: ["React", "JavaScript", "Tailwind CSS", "CSS"],
       description:
-        "Una aplicación web para gestionar tareas diarias Incluye autenticación de usuarios  y permite la categorización y priorización de tareas. Ideal para quienes buscan mejorar su productividad. ",
+        "Una aplicación web para gestionar tareas diarias Incluye autenticación de usuarios  y permite la categorización y priorización de tareas. Ideal para quienes buscan mejorar su productividad.",
       githubLink: "https://github.com/briziomauro/PPS-FrontEnd",
       projectLink: "https://gestor-de-tareas.com",
       imageUrl: training,
@@ -45,33 +45,35 @@ function Projects() {
   };
 
   return (
-    <div className="h-screen">
-      <div>
-        <h2 className="text-8xl  text-black dark:text-white font-bold ml-12 flex mt-36">
+    <div className="h-auto py-10 dark:bg-gray-900">
+      <div className="text-center">
+        <h2 className="text-4xl sm:text-5xl lg:text-6xl text-black dark:text-white font-bold mt-10 mb-12">
           Mis Proyectos:
         </h2>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 md:p-12">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="rounded-lg border bg-card text-card-foreground shadow-sm p-6 border-none bg-[#08132b] flex flex-col items-start"
+            className="rounded-lg  bg-card text-card-foreground shadow-md p-6 bg-[#08132b] flex flex-col items-start"
           >
             <img
               src={project.imageUrl}
               alt={`${project.title} Image`}
               className="w-full h-40 object-cover rounded-lg mb-4"
             />
-            <h3 className="text-2xl text-white font-bold mb-4">
+            <h3 className="text-lg sm:text-xl lg:text-2xl text-white font-bold mb-4">
               {project.title}
             </h3>
 
-            <p className="text-white mb-4">{project.description}</p>
+            <p className="text-sm sm:text-base text-white mb-4">
+              {project.description}
+            </p>
             <ul className="mb-4">
               {project.languages.map((language, index) => (
                 <li
                   key={index}
-                  className="inline-flex items-center text-white bg-[#212d43] rounded-full border text-xs font-semibold border-transparent px-2 mr-1 py-1"
+                  className="inline-flex items-center text-white bg-[#212d43] rounded-full text-xs font-semibold px-2 py-1 mr-1"
                 >
                   {languageIcons[language]} {language}
                 </li>
@@ -82,7 +84,7 @@ function Projects() {
                 href={project.githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white px-2 py-1 rounded-lg text-3xl hover:bg-blue-900 transition-all"
+                className="text-white px-2 py-1 rounded-lg text-2xl sm:text-3xl hover:bg-blue-900 transition-all"
               >
                 <FaGithub />
               </a>
@@ -91,7 +93,7 @@ function Projects() {
                   href={project.projectLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white text-3xl px-2 py-1 rounded-md hover:bg-blue-900 transition-all"
+                  className="text-white px-2 py-1 rounded-lg text-2xl sm:text-3xl hover:bg-blue-900 transition-all"
                 >
                   <FaCode />
                 </a>
