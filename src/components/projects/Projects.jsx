@@ -45,7 +45,7 @@ function Projects() {
   };
 
   return (
-    <div className="h-auto py-10 dark:bg-gray-900">
+    <div className="h-auto py-10 ">
       <div className="text-center">
         <h2 className="text-4xl sm:text-5xl lg:text-6xl text-black dark:text-white font-bold mt-10 mb-12">
           Mis Proyectos:
