@@ -10,6 +10,7 @@ import GradientBackground from "../gradientBackground/GradientBackground";
 import Skills from "../skills/Skills";
 import AboutMe from "../aboutMe/AboutMe";
 import CVSantiagoHaquinLoValvo from "../../assets/CVSantiagoHaquinLoValvo.pdf";
+import Footer from "../footer/Footer";
 
 const HomePage = () => {
   const [copied, setCopied] = useState(false);
@@ -182,7 +183,7 @@ const HomePage = () => {
         </div>
 
         <div className="absolute bottom-4 flex flex-col items-center text-black text-xl dark:text-white">
-          <IoIosArrowDown className="mt-1 text-2xl sm:text-3xl" />
+          <IoIosArrowDown className="scroll mt-1 text-2xl sm:text-3xl" />
         </div>
       </div>
 
@@ -200,6 +201,7 @@ const HomePage = () => {
         <div id="sobre-mi">
           <AboutMe />
         </div>
+        <Footer/>
       </div>
     </div>
   );

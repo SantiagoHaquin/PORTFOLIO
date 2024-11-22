@@ -1,9 +1,9 @@
-import { FaReact, FaCss3Alt, FaJsSquare, FaCode } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { FaReact, FaCss3Alt, FaJsSquare, FaCode, FaGithub } from "react-icons/fa";
 import { SiTailwindcss, SiDotnet } from "react-icons/si";
 import training from "../../assets/training.png";
 import proyecto1 from "../../assets/proyecto1.png";
 import swagger from "../../assets/swagger.png";
-import { FaGithub } from "react-icons/fa";
 
 function Projects() {
   const projects = [
@@ -11,7 +11,7 @@ function Projects() {
       title: "Training Center",
       languages: ["React", "JavaScript", "Tailwind CSS", "CSS"],
       description:
-        "Una aplicación web para gestionar tareas diarias Incluye autenticación de usuarios  y permite la categorización y priorización de tareas. Ideal para quienes buscan mejorar su productividad.",
+        "Una aplicación web para gestionar tareas diarias Incluye autenticación de usuarios y permite la categorización y priorización de tareas. Ideal para quienes buscan mejorar su productividad.",
       githubLink: "https://github.com/briziomauro/PPS-FrontEnd",
       projectLink: "https://gestor-de-tareas.com",
       imageUrl: training,
@@ -44,8 +44,32 @@ function Projects() {
     ".NET": <SiDotnet className="mr-1" />,
   };
 
+  const [visibleIndexes, setVisibleIndexes] = useState([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = Number(entry.target.getAttribute("data-index"));
+  
+          if (entry.isIntersecting) {
+            setVisibleIndexes((prev) => [...new Set([...prev, index])]);
+          } else {
+            setVisibleIndexes((prev) => prev.filter((i) => i !== index));
+          }
+        });
+      },
+      { threshold: 0.2 } 
+    );
+  
+    const elements = document.querySelectorAll(".project-card");
+    elements.forEach((el) => observer.observe(el));
+  
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="h-auto py-10 ">
+    <div className="h-auto py-10">
       <div className="text-center">
         <h2 className="text-4xl sm:text-5xl lg:text-6xl text-black dark:text-white font-bold mt-10 mb-12">
           Mis Proyectos:
@@ -55,7 +79,12 @@ function Projects() {
         {projects.map((project, index) => (
           <div
             key={index}
-            className="rounded-lg  bg-card text-card-foreground shadow-md p-6 bg-[#08132b] flex flex-col items-start"
+            data-index={index}
+            className={`project-card rounded-lg bg-card text-card-foreground shadow-md p-6 bg-[#08132b] flex flex-col items-start transform transition-all duration-700 ${
+              visibleIndexes.includes(index)
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
+            }`}
           >
             <img
               src={project.imageUrl}
@@ -65,7 +94,6 @@ function Projects() {
             <h3 className="text-lg sm:text-xl lg:text-2xl text-white font-bold mb-4">
               {project.title}
             </h3>
-
             <p className="text-sm sm:text-base text-white mb-4">
               {project.description}
             </p>
