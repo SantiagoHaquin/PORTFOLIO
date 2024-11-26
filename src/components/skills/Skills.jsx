@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import {
   FaReact,
   FaPython,
@@ -100,16 +101,16 @@ function Skills() {
   const [hoveredTech, setHoveredTech] = useState(null);
 
   return (
-    <div className="bg-black dark:bg-dark dark:bg-opacity-30 bg-opacity-10 min-h-screen flex flex-col justify-center items-center py-10 px-4">
+    <div className="bg-black dark:bg-zinc-300 dark:bg-opacity-10 bg-opacity-10 min-h-screen flex flex-col justify-center items-center py-10 px-4">
       <h2 className="text-2xl text-black dark:text-white sm:text-3xl md:text-4xl font-bold text-center mb-12 -mt-4">
         Herramientas y Tecnologías que utilizo
       </h2>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 sm:gap-8 md:gap-12 place-items-center">
         {technologies.map((tech, index) => (
-          <div
+          <motion.div
             key={index}
-            className="flex flex-col items-center transition-transform transform hover:translate-y-[-5px] group"
+            className="flex flex-col items-center transition-transform transform group"
             onMouseEnter={() => {
               setHoveredTech(tech.color);
               setDescription(tech.description);
@@ -120,6 +121,10 @@ function Skills() {
                 "Pasa el cursor sobre una habilidad para ver más detalles."
               );
             }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            viewport={{ once: false }}
           >
             <tech.icon
               className="text-3xl sm:text-4xl md:text-5xl mb-2"
@@ -130,7 +135,7 @@ function Skills() {
             <span className="text-xs sm:text-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100">
               {tech.name}
             </span>
-          </div>
+          </motion.div>
         ))}
       </div>
       <p className="text-xs text-black dark:text-white sm:text-sm md:text-base lg:text-lg mt-6 text-center max-w-2xl">

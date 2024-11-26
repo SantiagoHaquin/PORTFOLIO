@@ -11,7 +11,7 @@ function Projects() {
       title: "Training Center",
       languages: ["React", "JavaScript", "Tailwind CSS", "CSS"],
       description:
-        "Una aplicación web para gestionar tareas diarias Incluye autenticación de usuarios y permite la categorización y priorización de tareas. Ideal para quienes buscan mejorar su productividad.",
+        "Aplicacion web para gestionar los turnos, rutinas y planes alimenticios de los clientes. Con funcionalidades para registrar clientes pedir rutinas/planes nutricionales y funcionalidades para que los profesores interactuen con los clientes",
       githubLink: "https://github.com/briziomauro/PPS-FrontEnd",
       projectLink: "https://gestor-de-tareas.com",
       imageUrl: training,
@@ -20,7 +20,7 @@ function Projects() {
       title: "Mundo Matero",
       languages: ["React", "JavaScript", "BootsTrap", "CSS"],
       description:
-        "Una tienda en línea de ropa, con funcionalidades para explorar productos Incluye una sección de administración para la gestión de inventarios y seguimiento de pedidos.",
+        "Tienda en línea de mates, con funcionalidades para explorar productos Incluye una sección de administración de usuarios y productos.",
       githubLink: "https://github.com/arrastianicolas/E-coomerce-Mate-TP-LAB3-",
       projectLink: null,
       imageUrl: proyecto1,
@@ -29,7 +29,7 @@ function Projects() {
       title: "API e-commerce",
       languages: [".NET", "C#"],
       description:
-        "Un sistema educativo para gestionar estudiantes, instructores, fichas, asistencias mediante un código QR facilitando el seguimiento de los aprendices y la administración de la información académica.",
+        "Sistema para gestionar la tienda de mates con todas sus funcionalidades",
       githubLink: "https://github.com/SantiagoHaquin/TP-PROG3-WEBAPIMATE",
       projectLink: null,
       imageUrl: swagger,
