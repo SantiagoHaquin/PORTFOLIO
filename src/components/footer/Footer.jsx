@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 function Footer() {
   return (
@@ -22,14 +22,7 @@ function Footer() {
           >
             <FaLinkedin />
           </a>
-          <a
-            href="https://twitter.com/tu-usuario"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-[#0D6EFF] transition-transform transform hover:scale-125"
-          >
-            <FaTwitter />
-          </a>
+          
         </div>
       </div>
     </footer>

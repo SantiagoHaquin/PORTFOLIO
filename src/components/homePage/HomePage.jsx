@@ -39,7 +39,7 @@ const HomePage = () => {
   };
 
   const handleCopyEmail = () => {
-    const email = "santihaquin321@gmail.com";
+    const email = "santiagohaquinlovalvo@gmail.com";
     navigator.clipboard.writeText(email).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -89,9 +89,9 @@ const HomePage = () => {
     <div>
       <GradientBackground />
       <div className="min-h-screen flex flex-col items-center">
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-5 w-full px-4 sm:px-8">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-5 w-full px-4 sm:px-8">
           <Navbar />
-          <label className="swap mt-7 text-blue-950 dark:text-white my-4 swap-rotate">
+          <label className="swap mt-4 sm:mt-7 text-blue-950 dark:text-white my-2 sm:my-4 swap-rotate">
             <input
               type="checkbox"
               className="theme-controller"
@@ -101,7 +101,7 @@ const HomePage = () => {
             />
 
             <svg
-              className="swap-off h-9 w-9 fill-current"
+              className="swap-off h-7 w-7 sm:h-9 sm:w-9 fill-current"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -109,7 +109,7 @@ const HomePage = () => {
             </svg>
 
             <svg
-              className="swap-on h-9 w-9 fill-current"
+              className="swap-on h-7 w-7 sm:h-9 sm:w-9 fill-current"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -118,20 +118,20 @@ const HomePage = () => {
           </label>
         </div>
 
-        <div className="flex flex-col text-black dark:text-white items-center justify-center mt-20 text-center w-full px-4 sm:px-8">
-          <p className="text-2xl sm:text-3xl md:text-4xl font-spaceMono m-2 typewriter">
+        <div className="flex flex-col text-black dark:text-white items-center justify-center mt-12 sm:mt-20 text-center w-full px-4 sm:px-8">
+          <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-spaceMono m-2 typewriter">
             ¡Hola! soy...
           </p>
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-ubuntu font-bold mb-4">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-ubuntu font-bold mb-2 sm:mb-4">
             Santiago Haquin
           </h1>
-          <h2 className="font-roboto mt-4 text-2xl sm:text-3xl lg:text-4xl">
+          <h2 className="font-roboto mt-2 sm:mt-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
             Desarrollador Full-Stack
           </h2>
         </div>
 
-        <div className="flex flex-wrap justify-center text-lg items-center mt-4 font-roboto text-white px-4 sm:px-8">
-          <button className="m-1 gap-1 p-2 px-4 rounded-md bg-blue-950 flex items-center justify-center hover:bg-opacity-70 hover:bg-blue-900 transition-all duration-200 text-sm sm:text-base">
+        <div className="flex flex-wrap justify-center text-base sm:text-lg items-center mt-4 font-roboto text-white px-2 sm:px-4 md:px-8">
+          <button className="m-1 gap-1 p-1.5 sm:p-2 px-3 sm:px-4 rounded-md bg-blue-950 flex items-center justify-center hover:bg-opacity-70 hover:bg-blue-900 transition-all duration-200 text-xs sm:text-sm md:text-base">
             <IoDownloadOutline />
             <a
               className="ml-1"
@@ -144,7 +144,7 @@ const HomePage = () => {
           </button>
 
           <button
-            className="m-1 gap-1 p-2 px-4 rounded-md bg-blue-950 flex items-center justify-center hover:bg-opacity-70 hover:bg-blue-900 transition-all duration-200 text-sm sm:text-base"
+            className="m-1 gap-1 p-1.5 sm:p-2 px-3 sm:px-4 rounded-md bg-blue-950 flex items-center justify-center hover:bg-opacity-70 hover:bg-blue-900 transition-all duration-200 text-xs sm:text-sm md:text-base"
             onClick={() =>
               window.open(
                 "https://www.linkedin.com/in/santiago-haquin-lo-valvo-866717256/",
@@ -157,7 +157,7 @@ const HomePage = () => {
           </button>
 
           <button
-            className="m-1 gap-1 p-2 px-4 rounded-md bg-blue-950 flex items-center justify-center hover:bg-opacity-70 hover:bg-blue-900 transition-all duration-200 text-sm sm:text-base"
+            className="m-1 gap-1 p-1.5 sm:p-2 px-3 sm:px-4 rounded-md bg-blue-950 flex items-center justify-center hover:bg-opacity-70 hover:bg-blue-900 transition-all duration-200 text-xs sm:text-sm md:text-base"
             onClick={() =>
               window.open("https://github.com/SantiagoHaquin", "_blank")
             }
@@ -167,15 +167,16 @@ const HomePage = () => {
           </button>
 
           <button
-            className="relative m-1 gap-1 p-2 px-4 rounded-md bg-blue-950 flex items-center justify-center hover:bg-opacity-70 hover:bg-blue-900 transition-all duration-200 text-sm sm:text-base"
+            className="relative m-1 gap-1 p-1.5 sm:p-2 px-3 sm:px-4 rounded-md bg-blue-950 flex items-center justify-center hover:bg-opacity-70 hover:bg-blue-900 transition-all duration-200 text-xs sm:text-sm md:text-base"
             onClick={handleCopyEmail}
           >
             <IoMdMail />
-            <span className="ml-1 mr-1">santihaquin321@gmail.com</span>
+            <span className="ml-1 mr-1 hidden sm:inline">santiagohaquinlovalvo@gmail.com</span>
+            <span className="ml-1 mr-1 sm:hidden">Email</span>
             <FaCopy />
 
             {copied && (
-              <div className="absolute top-full mt-1 p-1 px-3 rounded-md bg-blue-800 text-white text-sm">
+              <div className="absolute top-full mt-1 p-1 px-3 rounded-md bg-blue-800 text-white text-xs sm:text-sm">
                 ¡Copiado!
               </div>
             )}
@@ -183,7 +184,7 @@ const HomePage = () => {
         </div>
 
         <div className="absolute bottom-4 flex flex-col items-center text-black text-xl dark:text-white">
-          <IoIosArrowDown className="scroll mt-1 text-2xl sm:text-3xl" />
+          <IoIosArrowDown className="scroll mt-1 text-xl sm:text-2xl md:text-3xl" />
         </div>
       </div>
 
@@ -191,10 +192,7 @@ const HomePage = () => {
         <div id="proyectos">
           <Projects />
         </div>
-        {/* <div id="trayectoria">
-          
-          <Trayectory />
-        </div> */}
+        
         <div id="skills">
           <Skills />
         </div>
