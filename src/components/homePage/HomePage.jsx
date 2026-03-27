@@ -6,10 +6,10 @@ import { IoMdMail } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import Projects from "../projects/Projects";
 import GradientBackground from "../gradientBackground/GradientBackground";
-// import Trayectory from "../trayectory/Trayectory";
+import Trayectory from "../trayectory/Trayectory";
 import Skills from "../skills/Skills";
 import AboutMe from "../aboutMe/AboutMe";
-import CVSantiagoHaquinLoValvo from "../../assets/CVSantiagoHaquinLoValvo.pdf";
+import CVSANTIAGOHAQUINLOVALVO from "../../assets/CVSANTIAGOHAQUINLOVALVO.pdf";
 import Footer from "../footer/Footer";
 
 const HomePage = () => {
@@ -48,41 +48,25 @@ const HomePage = () => {
 
   useEffect(() => {
     const target = document.querySelector(".typewriter");
-    const text = target.innerText;
+    const text = "¡Hola! soy...";
     let index = 0;
+    let timeoutId;
+
+    target.innerHTML = "";
 
     function type() {
       if (index < text.length) {
         target.innerHTML += text.charAt(index);
         index++;
-        setTimeout(type, 100);
+        timeoutId = setTimeout(type, 100);
       }
     }
 
-    target.innerHTML = "";
     type();
 
-    const interBubble = document.querySelector(".interactive");
-    let curX = 0;
-    let curY = 0;
-    let tgX = 0;
-    let tgY = 0;
-
-    const move = () => {
-      curX += (tgX - curX) / 20;
-      curY += (tgY - curY) / 20;
-      interBubble.style.transform = `translate(${Math.round(
-        curX
-      )}px, ${Math.round(curY)}px)`;
-      requestAnimationFrame(move);
+    return () => {
+      clearTimeout(timeoutId);
     };
-
-    window.addEventListener("mousemove", (event) => {
-      tgX = event.clientX;
-      tgY = event.clientY;
-    });
-
-    move();
   }, []);
 
   return (
@@ -135,7 +119,7 @@ const HomePage = () => {
             <IoDownloadOutline />
             <a
               className="ml-1"
-              href={CVSantiagoHaquinLoValvo}
+              href={CVSANTIAGOHAQUINLOVALVO}
               download="CV Santiago Haquin Lo Valvo.pdf"
               target="_blank"
             >
@@ -195,6 +179,9 @@ const HomePage = () => {
         
         <div id="skills">
           <Skills />
+        </div>
+        <div id="trayectoria">
+          <Trayectory />
         </div>
         <div id="sobre-mi">
           <AboutMe />

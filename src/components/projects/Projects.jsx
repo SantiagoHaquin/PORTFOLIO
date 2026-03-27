@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-import { FaReact, FaCss3Alt, FaJsSquare, FaCode, FaGithub } from "react-icons/fa";
-import { SiTailwindcss, SiDotnet } from "react-icons/si";
+import { useState } from "react";
+import { FaGithub } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import training from "../../assets/training.png";
 import proyecto1 from "../../assets/proyecto1.png";
@@ -8,10 +7,21 @@ import swagger from "../../assets/swagger.png";
 import Modal from "./Modal";
 import videotraining from "../../assets/videotraining.mp4";
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 36 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      delay: i * 0.13,
+      ease: [0.21, 0.47, 0.32, 0.98],
+    },
+  }),
+};
 
 function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [visibleIndexes, setVisibleIndexes] = useState([]);
 
   const projects = [
     {
@@ -23,158 +33,121 @@ function Projects() {
       githubLink: "https://github.com/briziomauro/PPS-FrontEnd",
       imageUrl: training,
       media: [
-        {
-          type: "image",
-          url: training,
-          alt: "Training Center - Vista principal"
-        },
-        {
-          type: "mp4",
-          url: videotraining,
-          alt: "Training Center - Vista secundaria"
-        }
-      ]
+        { type: "image", url: training, alt: "Training Center - Vista principal" },
+        { type: "mp4", url: videotraining, alt: "Training Center - Vista secundaria" },
+      ],
     },
     {
       id: 2,
       title: "Mundo Matero",
-      languages: ["React", "JavaScript", "BootsTrap", "CSS"],
+      languages: ["React", "JavaScript", "Bootstrap", "CSS"],
       description:
-        "Tienda en línea de mates, con funcionalidades para explorar productos Incluye una sección de administración de usuarios y productos.",
+        "Tienda en línea de mates, con funcionalidades para explorar productos. Incluye una sección de administración de usuarios y productos.",
       githubLink: "https://github.com/arrastianicolas/E-coomerce-Mate-TP-LAB3-",
       projectLink: null,
       imageUrl: proyecto1,
-      media: [
-        {
-          type: "image",
-          url: proyecto1,
-          alt: "Mundo Matero - Vista principal"
-        },
-        
-      ]
+      media: [{ type: "image", url: proyecto1, alt: "Mundo Matero - Vista principal" }],
     },
     {
       id: 3,
       title: "API e-commerce",
       languages: [".NET", "C#"],
       description:
-        "Sistema para gestionar la tienda de mates con todas sus funcionalidades",
+        "Sistema para gestionar la tienda de mates con todas sus funcionalidades.",
       githubLink: "https://github.com/SantiagoHaquin/TP-PROG3-WEBAPIMATE",
       projectLink: null,
       imageUrl: swagger,
-      media: [
-        {
-          type: "image",
-          url: swagger,
-          alt: "API e-commerce - Documentación Swagger"
-        },
-        
-      ]
+      media: [{ type: "image", url: swagger, alt: "API e-commerce - Documentación Swagger" }],
     },
   ];
 
-  const languageIcons = {
-    React: <FaReact className="mr-1" />,
-    JavaScript: <FaJsSquare className="mr-1" />,
-    "Tailwind CSS": <SiTailwindcss className="mr-1" />,
-    CSS: <FaCss3Alt className="mr-1" />,
-    ".NET": <SiDotnet className="mr-1" />,
-  };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const index = Number(entry.target.getAttribute("data-index"));
-          if (entry.isIntersecting) {
-            setVisibleIndexes((prev) => [...new Set([...prev, index])]);
-          } else {
-            setVisibleIndexes((prev) => prev.filter((i) => i !== index));
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-
-    const elements = document.querySelectorAll(".project-card");
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <div className="h-auto py-10">
-      <div className="text-center">
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl text-black dark:text-white font-bold mt-10 mb-12">
-          Mis Proyectos:
+    <div className="py-24 px-4 md:px-12">
+      {/* Section header */}
+      <div className="text-center mb-16">
+        <p className="text-xs font-mono tracking-[0.2em] text-blue-500 uppercase mb-3">
+          Trabajos
+        </p>
+        <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white">
+          Mis Proyectos
         </h2>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 md:p-12">
+
+      {/* Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {projects.map((project, index) => (
           <motion.div
             key={project.id}
-            layoutId={`card-${project.id}`}
-            data-index={index}
-            className={`project-card rounded-lg bg-card text-card-foreground shadow-md p-6 bg-[#08132b] flex flex-col items-start transform transition-all duration-300 cursor-pointer ${
-              visibleIndexes.includes(index)
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            }`}
+            custom={index}
+            variants={cardVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            whileHover={{ y: -6 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="group relative flex flex-col rounded-2xl border border-black/[0.1] dark:border-white/[0.07] bg-white dark:bg-[#0c1628] overflow-hidden cursor-pointer shadow-md dark:shadow-none hover:shadow-2xl hover:shadow-blue-500/10 transition-shadow duration-400"
             onClick={() => setSelectedProject(project)}
-            whileHover={{ 
-              y: -7,
-              boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2)",
-              transition: { duration: 0.1 }
-            }}
-            transition={{ duration: 0.1 }}
           >
-            <motion.img
-              layoutId={`image-${project.id}`}
-              src={project.imageUrl}
-              alt={`${project.title} Image`}
-              className="w-full h-40 object-cover rounded-lg mb-4"
-              
-            />
-            <motion.div layoutId={`content-${project.id}`}>
-              <h3 className="text-lg sm:text-xl lg:text-2xl text-white font-bold mb-4">
+            {/* ── Image ── */}
+            <div className="relative h-48 overflow-hidden flex-shrink-0">
+              <img
+                src={project.imageUrl}
+                alt={project.title}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover"
+              />
+              {/* fade image into card bg */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-white dark:to-[#0c1628]" />
+              {/* project index */}
+              <span className="absolute top-3 left-4 text-[11px] font-mono text-white/50 select-none">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+            </div>
+
+            {/* ── Content ── */}
+            <div
+              className="flex flex-col flex-1 px-5 pb-5"
+            >
+              {/* Tech pills */}
+              <div className="flex flex-wrap gap-1.5 mb-3">
+                {project.languages.map((lang) => (
+                  <span
+                    key={lang}
+                    className="text-[10px] font-mono px-2 py-0.5 rounded-md border border-blue-500/20 dark:border-blue-400/15 text-blue-600 dark:text-blue-400/80 bg-blue-500/[0.05]"
+                  >
+                    {lang}
+                  </span>
+                ))}
+              </div>
+
+              {/* Title */}
+              <h3 className="text-[17px] font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200 leading-snug">
                 {project.title}
               </h3>
-              <p className="text-sm sm:text-base text-white mb-4">
+
+              {/* Description */}
+              <p className="text-sm text-gray-500 dark:text-slate-400 leading-relaxed line-clamp-3 flex-1">
                 {project.description}
               </p>
-              <ul className="mb-4">
-                {project.languages.map((language, index) => (
-                  <li
-                    key={index}
-                    className="inline-flex items-center text-white bg-[#212d43] rounded-full text-xs font-semibold px-2 py-1 mr-1"
-                  >
-                    {languageIcons[language]} {language}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex space-x-4 mt-auto w-full justify-between">
+
+              {/* Footer */}
+              <div className="flex items-center justify-between mt-5 pt-4 border-t border-black/[0.05] dark:border-white/[0.05]">
                 <a
                   href={project.githubLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white px-2 py-1 rounded-lg text-2xl sm:text-3xl hover:bg-blue-900 transition-all"
+                  className="flex items-center gap-1.5 text-gray-400 dark:text-slate-500 hover:text-gray-900 dark:hover:text-white text-sm transition-colors duration-200"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <FaGithub />
+                  <FaGithub className="text-base" />
+                  <span>GitHub</span>
                 </a>
-                {project.projectLink && (
-                  <a
-                    href={project.projectLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white px-2 py-1 rounded-lg text-2xl sm:text-3xl hover:bg-blue-900 transition-all"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <FaCode />
-                  </a>
-                )}
+                <span className="text-[12px] text-blue-500 dark:text-blue-400 translate-x-3 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-250">
+                  Ver detalles →
+                </span>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
         ))}
       </div>

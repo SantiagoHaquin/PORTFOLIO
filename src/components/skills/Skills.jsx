@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   FaReact,
@@ -14,134 +13,108 @@ import {
   SiJavascript,
   SiVisualstudiocode,
   SiVisualstudio,
+  SiRedux,
 } from "react-icons/si";
 import { IoLogoGithub } from "react-icons/io";
+import { TbBrandReactNative } from "react-icons/tb";
 
-const technologies = [
+const categories = [
   {
-    name: "React",
-    icon: FaReact,
-    description:
-      "Biblioteca de JavaScript para construir interfaces de usuario interactivas.",
-    color: "#61DAFB",
+    label: "Frontend",
+    skills: [
+      { name: "React",        icon: FaReact,            color: "#61DAFB" },
+      { name: "React Native", icon: TbBrandReactNative,  color: "#61DAFB" },
+      { name: "JavaScript",   icon: SiJavascript,        color: "#F7DF1E" },
+      { name: "HTML",         icon: FaHtml5,             color: "#E34F26" },
+      { name: "CSS",          icon: FaCss3Alt,           color: "#1572B6" },
+      { name: "Tailwind CSS", icon: SiTailwindcss,       color: "#38BDF8" },
+      { name: "Bootstrap",    icon: FaBootstrap,         color: "#7952B3" },
+    ],
   },
   {
-    name: "NET Core",
-    icon: SiDotnet,
-    description:
-      "Plataforma de desarrollo de Microsoft para aplicaciones web, de escritorio y móviles.",
-    color: "#5C2D91",
+    label: "Backend",
+    skills: [
+      { name: ".NET Core", icon: SiDotnet,  color: "#512BD4" },
+      { name: "Python",    icon: FaPython,  color: "#3776AB" },
+    ],
   },
   {
-    name: "Python",
-    icon: FaPython,
-    description: "Lenguaje de programación multipropósito y fácil de aprender.",
-    color: "#ffde56",
+    label: "Base de datos",
+    skills: [
+      { name: "MySQL", icon: SiMysql, color: "#4479A1" },
+    ],
   },
   {
-    name: "HTML",
-    icon: FaHtml5,
-    description: "Lenguaje de marcado para estructurar contenido web.",
-    color: "#F16524",
-  },
-  {
-    name: "CSS",
-    icon: FaCss3Alt,
-    description: "Lenguaje de estilo para diseñar páginas web.",
-    color: "#23A7F3",
-  },
-  {
-    name: "MySQL",
-    icon: SiMysql,
-    description: "Sistema de gestión de bases de datos relacional.",
-    color: "#23A7F4",
-  },
-  {
-    name: "Tailwind CSS",
-    icon: SiTailwindcss,
-    description: "Framework de CSS para diseño web moderno.",
-    color: "#38BDF8",
-  },
-  {
-    name: "Bootstrap",
-    icon: FaBootstrap,
-    description: "Framework CSS para diseño responsivo.",
-    color: "#5C2D90",
-  },
-  {
-    name: "JavaScript",
-    icon: SiJavascript,
-    description: "Lenguaje de programación para web interactiva.",
-    color: "#F7E018",
-  },
-  {
-    name: "GitHub",
-    icon: IoLogoGithub,
-    description: "Plataforma para control de versiones y colaboración.",
-    color: "#FFFFFF",
-  },
-  {
-    name: "Visual Studio Code",
-    icon: SiVisualstudiocode,
-    description: "Editor de código ligero y versátil.",
-    color: "#23A7F2",
-  },
-  {
-    name: "Visual Studio",
-    icon: SiVisualstudio,
-    description: "Entorno de desarrollo integrado de Microsoft.",
-    color: "#CB96F8",
+    label: "Estado & Herramientas",
+    skills: [
+      { name: "Redux",         icon: SiRedux,          color: "#764ABC" },
+      { name: "GitHub",        icon: IoLogoGithub,     color: "#f0f6fc" },
+      { name: "VS Code",       icon: SiVisualstudiocode, color: "#007ACC" },
+      { name: "Visual Studio", icon: SiVisualstudio,   color: "#B262F5" },
+    ],
   },
 ];
 
+const allSkills = categories.flatMap((c) => c.skills);
+
+const badgeVariants = {
+  hidden:  { opacity: 0, y: 20 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, delay: i * 0.05, ease: [0.21, 0.47, 0.32, 0.98] },
+  }),
+};
+
 function Skills() {
-  const [description, setDescription] = useState(
-    "Pasa el cursor sobre una habilidad para ver más detalles."
-  );
-  const [hoveredTech, setHoveredTech] = useState(null);
-
   return (
-    <div className="bg-black dark:bg-zinc-300 dark:bg-opacity-10 bg-opacity-10 min-h-screen flex flex-col justify-center items-center py-10 px-4">
-      <h2 className="text-2xl text-black dark:text-white sm:text-3xl md:text-4xl font-bold text-center mb-12 -mt-4">
-        Herramientas y Tecnologías que utilizo
-      </h2>
+    <div className="py-24 px-4 md:px-12">
+      {/* Header */}
+      <div className="text-center mb-16">
+        <p className="text-xs font-mono tracking-[0.2em] text-blue-500 uppercase mb-3">
+          Conocimientos
+        </p>
+        <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white">
+          Stack & Herramientas
+        </h2>
+      </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 sm:gap-8 md:gap-12 place-items-center">
-        {technologies.map((tech, index) => (
+      {/* Skills grid */}
+      <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+        {allSkills.map((skill, i) => (
           <motion.div
-            key={index}
-            className="flex flex-col items-center transition-transform transform group"
-            onMouseEnter={() => {
-              setHoveredTech(tech.color);
-              setDescription(tech.description);
-            }}
-            onMouseLeave={() => {
-              setHoveredTech(null);
-              setDescription(
-                "Pasa el cursor sobre una habilidad para ver más detalles."
-              );
-            }}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: false }}
+            key={skill.name}
+            custom={i}
+            variants={badgeVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-40px" }}
           >
-            <tech.icon
-              className="text-3xl sm:text-4xl md:text-5xl mb-2"
-              style={{
-                color: hoveredTech === tech.color ? tech.color : "black",
-              }}
-            />
-            <span className="text-xs sm:text-sm opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-              {tech.name}
-            </span>
+            <SkillBadge skill={skill} />
           </motion.div>
         ))}
       </div>
-      <p className="text-xs text-black dark:text-white sm:text-sm md:text-base lg:text-lg mt-6 text-center max-w-2xl">
-        {description}
-      </p>
     </div>
+  );
+}
+
+function SkillBadge({ skill }) {
+  const Icon = skill.icon;
+
+  return (
+    <motion.div
+      className="group flex items-center gap-2 px-3 py-2 rounded-xl border border-black/[0.1] dark:border-white/[0.07] bg-white dark:bg-white/[0.03] shadow-sm dark:shadow-none cursor-default select-none"
+      whileHover={{ y: -2 }}
+      transition={{ duration: 0.15 }}
+      style={{ "--brand": skill.color }}
+    >
+      <Icon
+        className="text-base flex-shrink-0 text-gray-400 dark:text-slate-400 transition-colors duration-200 group-hover:text-[var(--brand)]"
+      />
+      <span className="text-sm font-medium text-gray-600 dark:text-slate-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-200 whitespace-nowrap">
+        {skill.name}
+      </span>
+    </motion.div>
   );
 }
 

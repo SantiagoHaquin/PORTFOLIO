@@ -66,140 +66,63 @@ html {
   animation: bounce 2s infinite;
 }
 
-:root {
-  --color-bg1: rgb(8, 10, 15);
-  --color-bg2: rgb(0, 17, 32);
-  --color-bg3: rgb(193, 204, 201);
-  --color1: 18, 113, 255;
-  --color2: 107, 74, 255;
-  --color3: 100, 100, 255;
-  --color4: 50, 160, 220;
-  --color5: 80, 47, 122;
-  --color-interactive: 140, 100, 255;
-  --circle-size: 80%;
-  --blending: hard-light;
-}
-
+/* ── Background ─────────────────────────────────────────── */
 .gradient-bg {
-  width: 100vw;
-  height: 100vh;
   position: fixed;
-  overflow: hidden;
-  top: 0;
-  left: 0;
+  inset: 0;
   z-index: -1;
-  background: linear-gradient(40deg, white, var(--color-bg3));
-  @apply transition-colors duration-200;
+  overflow: hidden;
+  background-color: #f7f9ff;
+  /* dot grid */
+  background-image: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='rgba(30%2C60%2C180%2C0.09)'/%3E%3C/svg%3E");
+  background-size: 28px 28px;
+  transition: background-color 0.3s ease;
 }
 
 .dark .gradient-bg {
-  background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
+  background-color: #060912;
+  background-image: url("data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='rgba(255%2C255%2C255%2C0.05)'/%3E%3C/svg%3E");
 }
 
-.noiseBg {
+/* color blooms — radial gradients, no blur filter */
+.bloom {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  mix-blend-mode: soft-light;
-  opacity: 0.3;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: opacity;
 }
 
-.svgBlur {
-  display: none;
+.bloom-1 {
+  width: 80vw;
+  height: 80vw;
+  top: -30vw;
+  left: -20vw;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.18) 0%, transparent 70%);
+  animation: bloomPulse 10s ease-in-out infinite alternate;
 }
 
-.gradients-container {
-  filter: url(#goo) blur(40px);
-  width: 100%;
-  height: 100%;
+.bloom-2 {
+  width: 60vw;
+  height: 60vw;
+  bottom: -20vw;
+  right: -15vw;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.13) 0%, transparent 70%);
+  animation: bloomPulse 13s ease-in-out infinite alternate-reverse;
 }
 
-.g1,
-.g2,
-.g3,
-.g4,
-.g5,
-.interactive {
-  position: absolute;
-  background: radial-gradient(
-      circle at center,
-      rgba(var(--color1), 0.8) 0,
-      rgba(var(--color2), 0) 50%
-    )
-    no-repeat;
-  mix-blend-mode: var(--blending);
-  width: var(--circle-size);
-  height: var(--circle-size);
-  top: calc(50% - var(--circle-size) / 2);
-  left: calc(50% - var(--circle-size) / 2);
+.dark .bloom-1 {
+  background: radial-gradient(circle, rgba(18, 113, 255, 0.28) 0%, transparent 70%);
 }
 
-.g1 {
-  animation: moveVertical 30s ease infinite;
+.dark .bloom-2 {
+  background: radial-gradient(circle, rgba(107, 74, 255, 0.22) 0%, transparent 70%);
 }
 
-.g2 {
-  animation: moveInCircle 20s reverse infinite;
+@keyframes bloomPulse {
+  from { opacity: 0.6; }
+  to   { opacity: 1;   }
 }
 
-.g3 {
-  animation: moveInCircle 40s linear infinite;
-}
-
-.g4 {
-  animation: moveHorizontal 40s ease infinite;
-}
-
-.g5 {
-  width: calc(var(--circle-size) * 2);
-  height: calc(var(--circle-size) * 2);
-  transform-origin: calc(50% - 800px) calc(50% + 200px);
-  animation: moveInCircle 20s ease infinite;
-}
-
-.interactive {
-  width: 100%;
-  height: 100%;
-  top: -50%;
-  left: -50%;
-  opacity: 0.7;
-}
-
-@keyframes moveInCircle {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(180deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes moveVertical {
-  0% {
-    transform: translateY(-50%);
-  }
-  50% {
-    transform: translateY(50%);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
-}
-
-@keyframes moveHorizontal {
-  0% {
-    transform: translateX(-50%) translateY(-10%);
-  }
-  50% {
-    transform: translateX(50%) translateY(10%);
-  }
-  100% {
-    transform: translateX(-50%) translateY(-10%);
-  }
+@media (prefers-reduced-motion: reduce) {
+  .bloom { animation: none; }
 }
